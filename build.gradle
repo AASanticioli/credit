@@ -30,6 +30,8 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	runtimeOnly 'com.h2database:h2:2.2.224'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.mockk:mockk:1.13.9'
+
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
 }
 
@@ -40,6 +42,7 @@ tasks.withType(KotlinCompile).configureEach {
 }
 
 tasks.test{
+	jvmArgs = ["-XX:+EnableDynamicAgentLoading"]
 	useJUnitPlatform()
 }
 
