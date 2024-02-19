@@ -14,6 +14,8 @@ class CreditService(
   private val creditRepository: CreditRepository,
   private val customerService: CustomerService
 ) : ICreditService {
+
+
   override fun save(credit: Credit): Credit {
     this.validDayFirstInstallment(credit.dayFirstInstallment)
     credit.apply {
@@ -27,7 +29,7 @@ class CreditService(
 
   override fun findByCreditCode(customerId: Long, creditCode: UUID): Credit {
     val credit: Credit = (this.creditRepository.findByCreditCode(creditCode)
-      ?: throw BusinessException("Creditcode $creditCode not found"))
+      ?: throw BusinessException("Credit code $creditCode not found"))
     return if (credit.customer?.id == customerId) credit
     else throw IllegalArgumentException("Contact admin")
     /*if (credit.customer?.id == customerId) {
